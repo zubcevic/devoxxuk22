@@ -1,0 +1,6 @@
+#Helidon Project Configuration
+#Wed May 11 18:31:34 CEST 2022
+schema.version=1.1.0
+helidon.version=2.5.0
+project.flavor=mp
+project.directory=/Users/zubcom/git-repo/devoxxuk22/helidon/DevoxxUK

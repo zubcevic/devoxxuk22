@@ -25,10 +25,12 @@ Then go to the created maven project directory and follow the instructions from 
 
     podman machine init
     podman build -t myhelidonimage -f Dockerfile.native .
-
+    podman run --rm --network=host myhelidonimage
     podman machine ssh
     curl -H 'Accept: application/json' -X GET http://localhost:8080/metrics
 
-Error: error creating build container: short-name resolution enforced but cannot prompt without a TTY
+Podman on Mac requires you to update the Dockerfile image references with the repository identifier.
 
-docker.io/
+    Error: error creating build container: short-name resolution enforced but cannot prompt without a TTY
+
+Use docker.io/ in front of the image id's.
