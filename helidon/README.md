@@ -32,7 +32,7 @@ Then go to the created maven project directory and follow the instructions from 
     curl -H 'Accept: application/json' -X GET http://localhost:8080/metrics
 
 
-    
+Just confirming that adding rootless_networking = "cni" under the [containers] section of ~/.config/containers/containers.conf does also fix this on MacOS :)
 
 Podman on Mac requires you to update the Dockerfile image references with the repository identifier.
 
