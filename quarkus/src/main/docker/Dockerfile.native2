@@ -1,0 +1,26 @@
+
+# 1st stage, build the app
+FROM docker.io/helidon/jdk11-graalvm-maven:21.3.0 as build
+
+WORKDIR /quarkus
+
+# Create a first layer to cache the "Maven World" in the local repository.
+# Incremental docker builds will always resume after that, unless you update
+# the pom
+ADD pom.xml .
+ADD src src
+RUN mvn package -Pnative -Dmaven.test.skip 
+
+RUN echo "done!"
+RUN ls -laR .
+
+# 2nd stage, build the runtime image
+FROM scratch
+WORKDIR /quarkus
+
+# Copy the binary built in the 1st stage
+COPY --from=build /quarkus/target/code-with-quarkus .
+
+ENTRYPOINT ["./code-with-quarkus"]
+
+EXPOSE 8080
