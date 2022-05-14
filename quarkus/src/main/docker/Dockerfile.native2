@@ -12,15 +12,17 @@ ADD src src
 RUN mvn package -Pnative -Dmaven.test.skip 
 
 RUN echo "done!"
-RUN ls -laR .
+RUN ls -la target
 
 # 2nd stage, build the runtime image
-FROM scratch
+#FROM scratch
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.5
 WORKDIR /quarkus
 
 # Copy the binary built in the 1st stage
-COPY --from=build /quarkus/target/code-with-quarkus .
+COPY --from=build /quarkus/target/code-with-quarkus-1.0.0-SNAPSHOT-runner .
+RUN ls -la /quarkus
 
-ENTRYPOINT ["./code-with-quarkus"]
+ENTRYPOINT ["./code-with-quarkus-1.0.0-SNAPSHOT-runner"]
 
 EXPOSE 8080
