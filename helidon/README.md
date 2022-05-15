@@ -23,7 +23,7 @@ Then go to the created maven project directory and follow the instructions from 
 
 ## Build container image
 
-    podman machine init --memory=8000 --cpus=4 myvm
+    podman machine init --memory=8000 --cpus=4 myvm --volume /Users --volume /Volumes
     podman machine start myvm
     
     podman build -t myhelidonimage -f Dockerfile.native .
